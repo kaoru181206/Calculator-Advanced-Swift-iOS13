@@ -26,20 +26,20 @@ class ViewController: UIViewController {
         }
     }
     
+    private var caluclator = CaluculatorLogic()
+    
     
     @IBAction func calcButtonPressed(_ sender: UIButton) {
     
         isFinishedTypingNumber = true
         
+        caluclator.setNumber(displayValue)
+        
         if let calcMethod = sender.currentTitle {
             
-            let caluclator = CaluculatorLogic(number: displayValue)
-            
-            guard let result = caluclator.calculate(symbol: calcMethod) else {
-                fatalError("The result of the calculation is nil.")
+            if let result = caluclator.calculate(symbol: calcMethod) {
+                displayValue = result
             }
-                
-            displayValue = result
         }
         
     }
